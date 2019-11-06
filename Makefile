@@ -38,7 +38,7 @@ SRC = 	malloc.c \
 		calloc.c \
 		free.c \
 		realloc.c \
-		round_up.c \
+		utils.c \
 
 O_FILES = $(SRC:%.c=$(OBJDIR)%.o)
 
