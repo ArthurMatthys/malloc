@@ -34,11 +34,15 @@ LIB=$(LFTDIR)libft.a
 
 INCLUDE = -I $(INCDIR) -I $(LFTDIR)includes
 
-SRC = 	malloc.c \
+SRC = \
 		calloc.c \
+		do_mmap.c \
+		find_room.c \
 		free.c \
+		malloc.c \
 		realloc.c \
-		utils.c \
+		static.c \
+		utils.c
 
 O_FILES = $(SRC:%.c=$(OBJDIR)%.o)
 

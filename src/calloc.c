@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:37:23 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/06 08:38:29 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/07 10:19:34 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,9 @@
 
 void	*calloc(size_t count, size_t size)
 {
-	(void)count;
-	(void)size;
-	return (NULL);
+	void	*ptr;
+
+	ptr = malloc(count * size);
+	ft_memset(ptr, 0, count * size);
+	return (ptr);
 }

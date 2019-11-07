@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/06 16:23:53 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/07 11:32:03 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,14 +58,8 @@ typedef struct			s_metablock
 ** Global used to store which memory has been aloocated
 */
 
-typedef struct			s_allocated
-{
-	t_metablock			*tiny_block;
-	t_metablock			*small_block;
-	t_metablock			*large_block;
-}						t_allocated;
+t_metablock *g_data[3];
 
-t_allocated g_data;
 /*
 ** Store a function regarding its index
 */
@@ -81,9 +75,9 @@ void					free(void *ptr);
 ** Dispatch functions
 */
 
-void					*handle_tiny(size_t size);
-void					*handle_small(size_t size);
-void					*handle_large(size_t size);
+void					*handle_tiny(size_t size, int type);
+void					*handle_small(size_t size, int type);
+void					*handle_large(size_t size, int type);
 
 /*
 ** Utils malloc
@@ -91,5 +85,8 @@ void					*handle_large(size_t size);
 
 size_t					round_up(size_t start, size_t to_round);
 int						get_type(size_t size);
+void					*do_mmap(size_t size, int type);
+void					*find_block(t_metablock *block, size_t size, int type);
+void					update_data(t_metadata *data, size_t size, int type);
 
 #endif
