@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/07 11:32:03 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/07 16:57:09 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,6 +70,7 @@ void					*malloc(size_t size);
 void					*calloc(size_t count, size_t size);
 void					*realloc(void *ptr, size_t size);
 void					free(void *ptr);
+void					show_alloc_mem(void);
 
 /*
 ** Dispatch functions

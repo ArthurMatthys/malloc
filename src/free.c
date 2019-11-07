@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:35:39 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/07 14:41:40 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/07 16:25:52 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,7 +48,7 @@ static int	find_area(t_metablock *block, void *ptr)
 	return (0);
 }
 
-void	free(void *ptr)
+void		free(void *ptr)
 {
 	t_metadata	*data;
 

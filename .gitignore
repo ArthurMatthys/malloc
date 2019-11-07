@@ -2,3 +2,6 @@
 *.so
 tags
 obj
+a.out
+main.c
+run.sh
