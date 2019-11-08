@@ -60,7 +60,7 @@ all: lib $(NAME)
 $(NAME): $(LIB) $(OBJDIR) $(O_FILES)
 	@printf "\r\033[K[$(NAME_UP)] \033[1;32mLinking...\033[0m"
 	@$(CC) $(CLFLAGS) -o $(NAME) $(O_FILES) -L$(LFTDIR) -lft $(INCLUDE)
-	@ln -s $(NAME) $(NAME_QUICK)
+	@ln -fs $(NAME) $(NAME_QUICK)
 	@printf "\r\033[K[$(NAME_UP)] \033[1;32mDone!\033[0m\n"
 
 lib:

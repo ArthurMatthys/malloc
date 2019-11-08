@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 10:21:04 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/07 11:01:35 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/08 11:44:33 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,7 @@ static void	*find_space(t_metadata *data, size_t size, int type)
 	{
 		if (data->freed && data->size >= size)
 		{
+//			ft_printf("cocoon : %p\t%lu\n", data, data->size);
 			ptr = (void*)(data + 1);
 			update_data(data, size, type);
 			break ;

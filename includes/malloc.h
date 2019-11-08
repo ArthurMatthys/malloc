@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/07 16:57:09 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/08 17:55:44 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,28 +31,35 @@
 # define SMALL 1
 # define LARGE 2
 
+# define CONSTRUCTOR void	__attribute__((constructor))
+# define DESTRUCTOR void	__attribute__((destructor))
+
+CONSTRUCTOR					calledfirst(void);
+DESTRUCTOR					calledlast(void);
+
 /*
 ** Metadata to put before an allocated memory
 */
 
-typedef struct			s_metadata
+typedef struct				s_metadata
 {
-	char				freed;
-	size_t				size;
-	struct s_metadata	*previous;
-	struct s_metadata	*next;
-}						t_metadata;
+	char					freed;
+	size_t					size;
+	struct s_metadata		*previous;
+	struct s_metadata		*next;
+}							t_metadata;
 
 /*
 ** Metadata to put at the start of a page
 */
 
-typedef struct			s_metablock
+typedef struct				s_metablock
 {
-	size_t				size;
-	struct s_metablock	*previous;
-	struct s_metablock	*next;
-}						t_metablock;
+	int						type;
+	size_t					size;
+	struct s_metablock		*previous;
+	struct s_metablock		*next;
+}							t_metablock;
 
 /*
 ** Global used to store which memory has been aloocated
@@ -64,30 +71,32 @@ t_metablock *g_data[3];
 ** Store a function regarding its index
 */
 
-typedef void			*(*t_dispatcher)();
+typedef void				*(*t_dispatcher)();
 
-void					*malloc(size_t size);
-void					*calloc(size_t count, size_t size);
-void					*realloc(void *ptr, size_t size);
-void					free(void *ptr);
-void					show_alloc_mem(void);
+void						*malloc(size_t size);
+void						*calloc(size_t count, size_t size);
+void						*realloc(void *ptr, size_t size);
+void						free(void *ptr);
+void						show_alloc_mem(void);
 
 /*
 ** Dispatch functions
 */
 
-void					*handle_tiny(size_t size, int type);
-void					*handle_small(size_t size, int type);
-void					*handle_large(size_t size, int type);
+void						*handle_tiny(size_t size, int type);
+void						*handle_small(size_t size, int type);
+void						*handle_large(size_t size, int type);
 
 /*
 ** Utils malloc
 */
 
-size_t					round_up(size_t start, size_t to_round);
-int						get_type(size_t size);
-void					*do_mmap(size_t size, int type);
-void					*find_block(t_metablock *block, size_t size, int type);
-void					update_data(t_metadata *data, size_t size, int type);
+size_t						round_up(size_t start, size_t to_round);
+int							get_type(size_t size);
+void						*do_mmap(size_t size, int type);
+void						*find_block(t_metablock *block,
+		size_t size, int type);
+void						update_data(t_metadata *data,
+		size_t size, int type);
 
 #endif

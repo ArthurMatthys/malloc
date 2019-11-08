@@ -5,3 +5,4 @@ obj
 a.out
 main.c
 run.sh
+*.DS_store

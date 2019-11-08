@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   realloc.c                                        .::    .:/ .      .::   */
+/*   test5.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/06 08:36:09 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/08 13:32:14 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/08 16:18:13 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/08 16:19:12 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/malloc.h"
+#include "includes/malloc.h"
 
-void	*realloc(void *ptr, size_t size)
+int	main()
 {
-//	ft_printf("Realloc call\n");
-	free(ptr);
-	ptr = malloc(size);
-	return (ptr);
+	malloc(1024);
+	malloc(1024 * 32);
+	malloc(1024 * 1024);
+	malloc(1024 * 1024 * 16);
+	malloc(1024 * 1024 * 128);
+	show_alloc_mem();
+	return (0);
 }

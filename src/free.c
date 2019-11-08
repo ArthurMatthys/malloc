@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:35:39 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/07 16:25:52 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/08 13:20:26 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,6 +52,7 @@ void		free(void *ptr)
 {
 	t_metadata	*data;
 
+//	ft_printf("Free call\n");
 	data = NULL;
 	if (find_area(g_data[0], ptr))
 		data = (t_metadata *)ptr - 1;

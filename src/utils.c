@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:17 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/07 11:57:41 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/08 11:43:56 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,21 +19,21 @@
 
 void		update_data(t_metadata *data, size_t size, int type)
 {
-	static int	size_tab[] = {1, TINY_SIZE, SMALL_SIZE};
+	static int	size_tab[] = {0, TINY_SIZE, SMALL_SIZE};
 	size_t		min_size;
-	size_t		old_size;
+	size_t		size_left;
 	t_metadata	*new;
 
-	min_size = size_tab[type];
-	if (data->size < size + min_size)
+	min_size = size_tab[type] + sizeof(t_metadata);
+	size_left = data->size - size;
+	data->size = size;
+	data->freed = 0;
+	if (size_left < min_size)
 		;
 	else
 	{
-		old_size = data->size;
-		data->size = size;
-		data->freed = 0;
-		new = (t_metadata*)((char *)(data + data->size + sizeof(t_metadata)));
-		new->size = old_size - (data->size + sizeof(t_metadata));
+		new = (t_metadata*)(((char *)data + data->size + sizeof(t_metadata)));
+		new->size = size_left - (data->size + sizeof(t_metadata));
 		new->freed = 1;
 		new->next = data->next;
 		new->previous = data;
@@ -45,9 +45,9 @@ void		update_data(t_metadata *data, size_t size, int type)
 ** round a size_t up to to_round
 */
 
-size_t		round_up(size_t start, size_t to_round)
+size_t		round_up(size_t size, size_t to_round)
 {
-	return ((start & (to_round - 1)) | to_round);
+	return (((size + to_round - 1) & (0xFFFFFFFFFFFFFFFF - (to_round - 1))));
 }
 
 /*
@@ -58,7 +58,7 @@ int			get_type(size_t size)
 {
 	if (size < TINY_SIZE)
 		return (TINY);
-	else if (size < TINY_SIZE)
+	else if (size < SMALL_SIZE)
 		return (SMALL);
 	else
 		return (LARGE);
