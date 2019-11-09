@@ -6,12 +6,12 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 16:16:19 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/08 16:18:01 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/09 17:41:52 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "includes/malloc.h"
+#include "../includes/malloc.h"
 #include <unistd.h>
 
 void	print(char *s)

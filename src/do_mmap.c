@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 09:07:15 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/08 16:59:19 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/09 17:33:17 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ void		*do_mmap(size_t size, int type)
 	new = mmap(0, size + sizeof(t_metablock),
 			PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	new->type = type;
-	new->size = size;
+	new->size = size + sizeof(t_metablock);
 	new->previous = NULL;
 	new->next = NULL;
 	cpy = g_data[type];
