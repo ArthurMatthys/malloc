@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/08 17:55:44 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/10 13:13:25 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -93,6 +93,7 @@ void						*handle_large(size_t size, int type);
 
 size_t						round_up(size_t start, size_t to_round);
 int							get_type(size_t size);
+int							find_area(t_metablock *block, void *ptr);
 void						*do_mmap(size_t size, int type);
 void						*find_block(t_metablock *block,
 		size_t size, int type);

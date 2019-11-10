@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:35:39 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/08 13:20:26 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/10 13:12:42 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,25 +34,13 @@ static void	merge_metadata(t_metadata *data)
 	}
 }
 
-static int	find_area(t_metablock *block, void *ptr)
-{
-	t_metablock	*cpy;
-
-	cpy = block;
-	while (cpy)
-	{
-		if (ptr > (void*)cpy && ptr < ((void*)cpy + cpy->size))
-			return (1);
-		cpy = cpy->next;
-	}
-	return (0);
-}
-
 void		free(void *ptr)
 {
 	t_metadata	*data;
 
 //	ft_printf("Free call\n");
+	if (!ptr)
+		return ;
 	data = NULL;
 	if (find_area(g_data[0], ptr))
 		data = (t_metadata *)ptr - 1;

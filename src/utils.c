@@ -6,12 +6,40 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:17 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/08 11:43:56 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/10 13:12:56 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
+
+static int	find_metadata(t_metablock *block, void *ptr)
+{
+	t_metadata	*actual;
+
+	actual = (t_metadata*)(block + 1);
+	while (actual)
+	{
+		if (ptr == actual + 1)
+			return (1);
+		actual = actual->next;
+	}
+	return (0);
+}
+
+int		find_area(t_metablock *block, void *ptr)
+{
+	t_metablock	*cpy;
+
+	cpy = block;
+	while (cpy)
+	{
+		if (ptr > (void*)cpy && ptr < ((void*)cpy + cpy->size))
+			return (find_metadata(cpy, ptr));
+		cpy = cpy->next;
+	}
+	return (0);
+}
 
 /*
 ** Create a new metadata after allocation and update the new one
