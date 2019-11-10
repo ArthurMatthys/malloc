@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 16:26:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/09 17:39:46 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/10 18:17:13 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ static size_t	show_allocated_memory(t_metadata *data)
 
 	size = data->freed ? 0 : data->size;
 	if (!data->freed)
-		show_range(data, sizeof(data), data->size);
+		show_range(data, sizeof(t_metadata), data->size);
 	if (!data)
 		return (0);
 	if (!data->next)
