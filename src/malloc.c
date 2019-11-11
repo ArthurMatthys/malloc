@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:34:42 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/10 18:13:56 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/11 15:19:18 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,16 +21,38 @@ static void	*new_alloc(size_t size, int type)
 
 	size_type[TINY] = TINY_BLOCK_SIZE;
 	size_type[SMALL] = SMALL_BLOCK_SIZE;
-	block = do_mmap(size_type[type], size, type);
+	block = do_mmap(size_type[type], type);
 	ptr = find_block(block, size, type);
-	ft_printf("Before ret : %lu\n", block->size);
-	return (type == 2 ? block + 1 : ptr);
+	return (ptr);
 }
 
 static void	*malloc_large(size_t size)
 {
-	(void)size;
-	return (NULL);
+	t_metadata	*data;
+	t_metadata	*cpy;
+	size_t		final_size;
+	void		*ptr;
+
+	final_size = round_up(size, getpagesize());
+	if ((ptr = find_space(g_data[LARGE], final_size, LARGE)))
+		return (ptr);
+	data = mmap(0, final_size,
+			PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	data->freed = 0;
+	data->size = size;
+	data->next = NULL;
+	data->previous = NULL;
+	cpy = g_data[LARGE];
+	if (!cpy)
+		g_data[LARGE] = data;
+	else
+	{
+		while (cpy->next)
+			cpy = cpy->next;
+		cpy->next = data;
+		data->previous = cpy;
+	}
+	return (data + 1);
 }
 
 void		*malloc(size_t size)
@@ -43,8 +65,6 @@ void		*malloc(size_t size)
 	type = get_type(new_size);
 	if (type == LARGE)
 		return (malloc_large(new_size));
-//	ft_printf("type : %d\tsize : %lu\tnew_size : %lu\n", type, size, new_size);
 	ptr = find_block(g_data[type], new_size, type);
-//	ft_printf("ptr : %p\n", ptr);
 	return (ptr ? ptr : new_alloc(new_size, type));
 }

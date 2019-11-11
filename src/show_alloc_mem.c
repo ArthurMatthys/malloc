@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 16:26:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/10 18:17:13 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/11 15:56:28 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,18 +19,22 @@ static void		show_range(void *ptr, size_t size_ptr, size_t size)
 			((char*)ptr + size_ptr) + size, size);
 }
 
-static size_t	show_allocated_memory(t_metadata *data)
+static size_t	show_allocated_memory(t_metadata *data, int type)
 {
 	size_t	size;
 
-	size = data->freed ? 0 : data->size;
-	if (!data->freed)
-		show_range(data, sizeof(t_metadata), data->size);
 	if (!data)
 		return (0);
+	size = data->freed ? 0 : data->size;
+	if (!data->freed)
+	{
+		if (type == LARGE)
+			ft_printf("LARGE : %#X\n", data);
+		show_range(data, sizeof(t_metadata), data->size);
+	}
 	if (!data->next)
 		return (size);
-	return (size + show_allocated_memory(data->next));
+	return (size + show_allocated_memory(data->next, type));
 }
 
 static size_t	show_data(t_metablock *block, const char *str, int type)
@@ -42,14 +46,8 @@ static size_t	show_data(t_metablock *block, const char *str, int type)
 	size_block = 0;
 	while (cpy)
 	{
-		ft_printf("%s : %#X\n", str, cpy);
-		if (type == LARGE)
-		{
-			size_block += cpy->size;
-			show_range(cpy, sizeof(cpy), cpy->size);
-		}
-		else
-			size_block += show_allocated_memory((t_metadata*)(cpy + 1));
+		ft_printf("%s : %X\n", str, cpy);
+		size_block += show_allocated_memory((t_metadata*)(cpy + 1), type);
 		cpy = cpy->next;
 	}
 	return (size_block);
@@ -61,6 +59,6 @@ void		show_alloc_mem(void)
 
 	tot = show_data(g_data[TINY], "TINY", TINY);
 	tot += show_data(g_data[SMALL], "SMALL", SMALL);
-	tot += show_data(g_data[LARGE], "LARGE", LARGE);
+	tot += show_allocated_memory(g_data[LARGE], LARGE);
 	ft_printf("Total : %lu octets\n", tot);
 }

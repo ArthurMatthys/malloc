@@ -6,14 +6,14 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 10:21:04 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/08 11:44:33 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/11 14:39:31 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-static void	*find_space(t_metadata *data, size_t size, int type)
+void		*find_space(t_metadata *data, size_t size, int type)
 {
 	void	*ptr;
 
@@ -22,14 +22,13 @@ static void	*find_space(t_metadata *data, size_t size, int type)
 	{
 		if (data->freed && data->size >= size)
 		{
-//			ft_printf("cocoon : %p\t%lu\n", data, data->size);
 			ptr = (void*)(data + 1);
 			update_data(data, size, type);
-			break ;
+			return (ptr);
 		}
 		data = data->next;
 	}
-	return (ptr);
+	return (NULL);
 }
 
 /*

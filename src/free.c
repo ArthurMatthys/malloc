@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:35:39 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/10 13:12:42 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/11 17:03:32 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,11 +42,11 @@ void		free(void *ptr)
 	if (!ptr)
 		return ;
 	data = NULL;
-	if (find_area(g_data[0], ptr))
+	if (find_area(g_data[0], ptr) >= 0)
 		data = (t_metadata *)ptr - 1;
-	else if (find_area(g_data[1], ptr))
+	else if (find_area(g_data[1], ptr) >= 0)
 		data = (t_metadata *)ptr - 1;
-	else if (find_area(g_data[2], ptr))
+	else if (find_alloc(g_data[2], ptr))
 		data = (t_metadata *)ptr - 1;
 	if (data)
 		merge_metadata(data);

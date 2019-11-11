@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 13:28:44 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/10 13:15:55 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/11 16:51:05 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,8 +31,9 @@ int main()
 	print(addr1);
 	ft_printf("before\n");
 	addr3 = (char*)realloc(addr1, 128*M);
-	ft_printf("after : %X\n", addr3);
+	ft_printf("after : %X\t%X\n", addr3, addr1);
 	addr3[127 * M] = 42;
 	print(addr3);
+	show_alloc_mem();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:17 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/10 17:28:53 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/11 17:03:19 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,10 +21,10 @@ static int	find_metadata(t_metablock *block, void *ptr)
 	while (actual)
 	{
 		if (ptr == actual + 1)
-			return (1);
+			return (actual->size);
 		actual = actual->next;
 	}
-	return (0);
+	return (-1);
 }
 
 int		find_area(t_metablock *block, void *ptr)
@@ -38,7 +38,7 @@ int		find_area(t_metablock *block, void *ptr)
 			return (find_metadata(cpy, ptr));
 		cpy = cpy->next;
 	}
-	return (0);
+	return (-1);
 }
 
 /*
@@ -48,20 +48,18 @@ int		find_area(t_metablock *block, void *ptr)
 void		update_data(t_metadata *data, size_t size, int type)
 {
 	static int	size_tab[] = {0, TINY_SIZE, SMALL_SIZE};
-	size_t		min_size;
 	size_t		size_left;
+	size_t		size_needed;
 	t_metadata	*new;
 
-	min_size = size_tab[type] + sizeof(t_metadata);
+	size_needed = size_tab[type] + sizeof(t_metadata);
 	size_left = data->size - size;
-	data->size = size;
+	data->size = (type == LARGE ? data->size : size);
 	data->freed = 0;
-	if (size_left < min_size)
-		;
-	else
+	if (type != LARGE && size_left > size_needed)
 	{
 		new = (t_metadata*)(((char *)data + data->size + sizeof(t_metadata)));
-		new->size = size_left - (data->size + sizeof(t_metadata));
+		new->size = size_left - sizeof(t_metadata);
 		new->freed = 1;
 		new->next = data->next;
 		new->previous = data;
