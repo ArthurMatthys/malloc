@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 16:26:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/11 15:56:28 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/12 16:54:30 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,7 +53,7 @@ static size_t	show_data(t_metablock *block, const char *str, int type)
 	return (size_block);
 }
 
-void		show_alloc_mem(void)
+void			show_alloc_mem(void)
 {
 	size_t	tot;
 

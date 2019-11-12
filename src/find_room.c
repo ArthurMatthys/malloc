@@ -6,26 +6,21 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 10:21:04 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/11 14:39:31 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/12 16:55:24 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-void		*find_space(t_metadata *data, size_t size, int type)
+t_metadata
+	*find_metadata(t_metadata *data, void *ptr, int fun, size_t size)
 {
-	void	*ptr;
-
-	ptr = NULL;
 	while (data)
 	{
-		if (data->freed && data->size >= size)
-		{
-			ptr = (void*)(data + 1);
-			update_data(data, size, type);
-			return (ptr);
-		}
+		if ((ptr && data + 1 == ptr) ||
+				(fun && data->freed && data->size >= size))
+			return (data);
 		data = data->next;
 	}
 	return (NULL);
@@ -36,19 +31,35 @@ void		*find_space(t_metadata *data, size_t size, int type)
 ** mmaped block to put the new pointer
 */
 
-void		*find_block(t_metablock *block, size_t size, int type)
+t_metadata
+	*find_block(t_metablock *block, void *ptr, int fun, size_t size)
 {
-	void		*ptr;
 	t_metablock	*cpy;
+	t_metadata	*ret;
 
+	ret = NULL;
 	cpy = block;
-	ptr = NULL;
 	while (cpy)
 	{
-		ptr = find_space((t_metadata*)(cpy + 1), size, type);
-		if (ptr)
+		ret = find_metadata((t_metadata*)(cpy + 1), ptr, fun, size);
+		if (ret)
 			break ;
 		cpy = cpy->next;
 	}
-	return (ptr);
+	return (ret);
+}
+
+t_metadata
+	*find_alloc(void *ptr)
+{
+	t_metadata	*ret;
+
+	ret = NULL;
+	if (!ret)
+		ret = find_block(g_data[TINY], ptr, FIND_ALLOC, 0);
+	if (!ret)
+		ret = find_block(g_data[SMALL], ptr, FIND_ALLOC, 0);
+	if (!ret)
+		ret = find_metadata(g_data[LARGE], ptr, FIND_ALLOC, 0);
+	return (ret);
 }

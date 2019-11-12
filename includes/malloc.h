@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/11 16:55:31 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/12 16:56:35 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,9 @@
 # define TINY 0
 # define SMALL 1
 # define LARGE 2
+
+# define FIND_ALLOC 0
+# define FIND_ROOM 1
 
 # define CONSTRUCTOR void	__attribute__((constructor))
 # define DESTRUCTOR void	__attribute__((destructor))
@@ -98,13 +101,12 @@ void						*handle_large(size_t size, int type);
 
 size_t						round_up(size_t start, size_t to_round);
 int							get_type(size_t size);
-int							find_area(t_metablock *block, void *ptr);
 void						*do_mmap(size_t size_alloc, int type);
-size_t						find_alloc(t_metadata *data, void *ptr);
-void						*find_space(t_metadata *data,
-		size_t size, int type);
-void						*find_block(t_metablock *block,
-		size_t size, int type);
+t_metadata					*find_alloc(void *ptr);
+t_metadata					*find_block(t_metablock *block,
+		void *ptr, int fun, size_t size);
+t_metadata					*find_metadata(t_metadata *data,
+		void *ptr, int fun, size_t size);
 void						update_data(t_metadata *data,
 		size_t size, int type);
 
