@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 13:28:44 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/11 16:51:05 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/12 10:56:15 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,16 +24,15 @@ void	print(char *s)
 int main()
 {
 	char *addr1;
+	char *addr2;
 	char *addr3;
 
 	addr1 = (char*)malloc(16 * M);
 	strcpy(addr1, "Bonjours\n");
 	print(addr1);
-	ft_printf("before\n");
+	addr2 = (char*)malloc(16 * M);
 	addr3 = (char*)realloc(addr1, 128*M);
-	ft_printf("after : %X\t%X\n", addr3, addr1);
-	addr3[127 * M] = 42;
+//	addr3[127 * M] = 42;
 	print(addr3);
-	show_alloc_mem();
 	return (0);
 }

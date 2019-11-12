@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:36:09 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/11 16:55:16 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/12 10:54:30 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,9 +20,8 @@ static void		*find_room(t_metadata *data, void *ptr, size_t size)
 	if (!data)
 	{
 		cpy = malloc(size);
-		ft_printf("yo1\n");
-		ft_memmove(cpy, ptr, size);
-		ft_printf("yo2\n");
+		ft_memmove(cpy, ptr,
+				min(size, ((t_metadata*)(ptr - sizeof(t_metadata)))->size));
 		free(ptr);
 		return (cpy);
 	}
@@ -70,10 +69,7 @@ void	*realloc(void *ptr, size_t size)
 	if (type == LARGE)
 		return (realloc_large(ptr, round_up(new_size, getpagesize())));
 	if ((room = find_area(g_data[type], ptr)) == -1)
-	{
-		ft_printf("oupsi\n");
 		return (NULL);
-	}
 	if ((size_t)room >= size)
 		return (ptr);
 	new_ptr = malloc(new_size);
