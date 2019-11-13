@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 15:06:19 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 15:55:56 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,9 +82,9 @@ void						show_alloc_mem(void);
 ** Dispatch functions
 */
 
-void						*malloc_tiny(size_t size, int type);
-void						*malloc_small(size_t size, int type);
-void						*malloc_large(size_t size, int type);
+void						*malloc_tiny(size_t size);
+void						*malloc_small(size_t size);
+void						*malloc_large(size_t size);
 
 /*
 ** Utils malloc
