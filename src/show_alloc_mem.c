@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 16:26:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 13:43:38 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 17:05:13 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,13 +15,8 @@
 
 static void		show_range(t_metadata *ptr, size_t size_ptr, size_t size)
 {
-	ft_printf("%#X - %#X : %lu octets", ptr + size_ptr,
+	ft_printf("%#X - %#X : %lu octets\n", ((char*)ptr + size_ptr),
 			((char*)ptr + size_ptr) + size, size);
-	ft_printf("\tprev : %p\tnext : %p", ptr->previous, ptr->next);
-	if (ptr->freed)
-		ft_printf("\tfree\n");
-	else
-		ft_printf("\n");
 }
 
 static size_t	show_allocated_memory(t_metadata *data, int type)

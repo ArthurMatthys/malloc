@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:34:42 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 15:42:21 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 16:31:36 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,7 +37,7 @@ static void	*malloc_large(size_t size)
 	data = mmap(0, final_size,
 			PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	data->freed = 0;
-	data->size = size - sizeof(t_metadata);
+	data->size = final_size - sizeof(t_metadata);
 	data->next = NULL;
 	data->previous = NULL;
 	cpy = g_data[LARGE];
