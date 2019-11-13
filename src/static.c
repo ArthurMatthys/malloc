@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 16:15:53 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/11 15:09:29 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 14:55:48 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,7 @@
 
 void		*g_data[] = {NULL, NULL, NULL};
 
+/*
 static void	init_area(t_metablock *ptr, size_t size, int type)
 {
 	t_metadata	*start;
@@ -32,6 +33,7 @@ static void	init_area(t_metablock *ptr, size_t size, int type)
 
 void		calledfirst(void)
 {
+	ft_printf("Constructor call\n");
 	g_data[TINY] = mmap(0, TINY_BLOCK_SIZE + sizeof(t_metablock),
 			PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	init_area(g_data[TINY], TINY_BLOCK_SIZE, TINY);
@@ -48,13 +50,15 @@ static void	free_all(t_metablock *ptr)
 	munmap(ptr, ptr->size);
 	ptr = NULL;
 }
-
+*/
 void		calledlast(void)
 {
-	free_all(g_data[TINY]);
-	g_data[TINY] = NULL;
-	free_all(g_data[SMALL]);
-	g_data[SMALL] = NULL;
-	free_all(g_data[LARGE]);
-	g_data[LARGE] = NULL;
+//	ft_printf("Destructor call\n");
+//	show_alloc_mem();
+//	free_all(g_data[TINY]);
+//	g_data[TINY] = NULL;
+//	free_all(g_data[SMALL]);
+//	g_data[SMALL] = NULL;
+//	free_all(g_data[LARGE]);
+//	g_data[LARGE] = NULL;
 }

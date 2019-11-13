@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   realloc.c                                        .::    .:/ .      .::   */
+/*   test5.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/06 08:36:09 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 10:26:08 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/08 16:18:13 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/13 14:56:52 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-void	*realloc(void *ptr, size_t size)
+int	main()
 {
-	t_metadata	*found;
-	void		*ret;
-	size_t		new_size;
+	void	*ptr1;
+	void	*ptr2;
+	void	*ptr3;
+	void	*ptr4;
+	void	*ptr5;
 
-//	ft_printf("\tptr = realloc((void*)%p, %lu);\n", ptr, size);
-	if (!ptr)
-		return (malloc(size));
-	new_size = round_up(size, 16);
-	found = find_alloc(ptr);
-	if (!found)
-		return (NULL);
-	if (found->size >= new_size)
-		return (ptr);
-	else
-	{
-		ret = malloc(new_size);
-		ft_memmove(ret, ptr, min(size, found->size));
-		free(ptr);
-		return (ret);
-	}
-	return (NULL);
+	ptr1 = malloc(1024);
+	ptr2 = malloc(1024 * 32);
+	ptr3 = malloc(1024 * 1024);
+	ptr4 = malloc(1024 * 1024 * 16);
+	ptr5 = malloc(1024 * 1024 * 128);
+	show_alloc_mem();
+	return (0);
 }

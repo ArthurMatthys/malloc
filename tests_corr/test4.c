@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   realloc.c                                        .::    .:/ .      .::   */
+/*   test4.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/06 08:36:09 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 10:26:08 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/08 16:16:19 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/11 17:00:38 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
+#include <unistd.h>
 
-void	*realloc(void *ptr, size_t size)
+void	print(char *s)
 {
-	t_metadata	*found;
-	void		*ret;
-	size_t		new_size;
+	write(1, s, strlen(s));
+}
 
-//	ft_printf("\tptr = realloc((void*)%p, %lu);\n", ptr, size);
-	if (!ptr)
-		return (malloc(size));
-	new_size = round_up(size, 16);
-	found = find_alloc(ptr);
-	if (!found)
-		return (NULL);
-	if (found->size >= new_size)
-		return (ptr);
-	else
-	{
-		ret = malloc(new_size);
-		ft_memmove(ret, ptr, min(size, found->size));
-		free(ptr);
-		return (ret);
-	}
-	return (NULL);
+int main()
+{
+	char *addr;
+
+	addr = malloc(16);
+	free(NULL);
+	ft_printf("1\t%p\n", addr);
+	free((void *)addr + 5);
+	ft_printf("2\n");
+	if (realloc((void*)addr +5, 10) == NULL)
+		print("Bonjours\n");
+	return (0);
 }

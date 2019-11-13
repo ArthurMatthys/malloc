@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/12 16:56:35 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 12:53:53 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,10 +28,10 @@
 # define FIND_ALLOC 0
 # define FIND_ROOM 1
 
-# define CONSTRUCTOR void	__attribute__((constructor))
+//# define CONSTRUCTOR void	__attribute__((constructor))
 # define DESTRUCTOR void	__attribute__((destructor))
-
-CONSTRUCTOR					calledfirst(void);
+//
+//CONSTRUCTOR					calledfirst(void);
 DESTRUCTOR					calledlast(void);
 
 /*
@@ -42,8 +42,8 @@ typedef struct				s_metadata
 {
 	struct s_metadata		*previous;
 	struct s_metadata		*next;
-	char					freed;
 	size_t					size;
+	char					freed;
 }							t_metadata;
 
 /*
@@ -54,8 +54,8 @@ typedef struct				s_metablock
 {
 	struct s_metablock		*previous;
 	struct s_metablock		*next;
-	int						type;
 	size_t					size;
+	int						type;
 }							t_metablock;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:34:42 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/12 16:55:07 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 10:26:02 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,6 +59,7 @@ void		*malloc(size_t size)
 	size_t		new_size;
 	int			type;
 
+//	ft_printf("\tptr = malloc(%lu);\n", size);
 	new_size = round_up(size, 16);
 	type = get_type(new_size);
 	if (type == LARGE)
