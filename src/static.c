@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 16:15:53 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 14:55:48 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 15:32:15 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,12 +14,14 @@
 #include "../includes/malloc.h"
 
 void		*g_data[] = {NULL, NULL, NULL};
-
 /*
+static int count = 0;
+
 static void	init_area(t_metablock *ptr, size_t size, int type)
 {
 	t_metadata	*start;
 
+	count += 1;
 	ptr->type = type;
 	ptr->size = size + sizeof(t_metablock);
 	ptr->previous = NULL;
@@ -50,15 +52,17 @@ static void	free_all(t_metablock *ptr)
 	munmap(ptr, ptr->size);
 	ptr = NULL;
 }
-*/
+
 void		calledlast(void)
 {
-//	ft_printf("Destructor call\n");
-//	show_alloc_mem();
-//	free_all(g_data[TINY]);
-//	g_data[TINY] = NULL;
-//	free_all(g_data[SMALL]);
-//	g_data[SMALL] = NULL;
-//	free_all(g_data[LARGE]);
-//	g_data[LARGE] = NULL;
+	if (count != 1)
+		return ;
+	show_alloc_mem();
+	free_all(g_data[TINY]);
+	g_data[TINY] = NULL;
+	free_all(g_data[SMALL]);
+	g_data[SMALL] = NULL;
+	free_all(g_data[LARGE]);
+	g_data[LARGE] = NULL;
 }
+*/
