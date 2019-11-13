@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:36:09 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 10:26:08 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 17:09:43 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,6 @@ void	*realloc(void *ptr, size_t size)
 	void		*ret;
 	size_t		new_size;
 
-//	ft_printf("\tptr = realloc((void*)%p, %lu);\n", ptr, size);
 	if (!ptr)
 		return (malloc(size));
 	new_size = round_up(size, 16);
