@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:29 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 12:53:53 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/13 15:06:19 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,15 +24,6 @@
 # define TINY 0
 # define SMALL 1
 # define LARGE 2
-
-# define FIND_ALLOC 0
-# define FIND_ROOM 1
-
-//# define CONSTRUCTOR void	__attribute__((constructor))
-# define DESTRUCTOR void	__attribute__((destructor))
-//
-//CONSTRUCTOR					calledfirst(void);
-DESTRUCTOR					calledlast(void);
 
 /*
 ** Metadata to put before an allocated memory
@@ -91,9 +82,9 @@ void						show_alloc_mem(void);
 ** Dispatch functions
 */
 
-void						*handle_tiny(size_t size, int type);
-void						*handle_small(size_t size, int type);
-void						*handle_large(size_t size, int type);
+void						*malloc_tiny(size_t size, int type);
+void						*malloc_small(size_t size, int type);
+void						*malloc_large(size_t size, int type);
 
 /*
 ** Utils malloc
@@ -101,13 +92,5 @@ void						*handle_large(size_t size, int type);
 
 size_t						round_up(size_t start, size_t to_round);
 int							get_type(size_t size);
-void						*do_mmap(size_t size_alloc, int type);
-t_metadata					*find_alloc(void *ptr);
-t_metadata					*find_block(t_metablock *block,
-		void *ptr, int fun, size_t size);
-t_metadata					*find_metadata(t_metadata *data,
-		void *ptr, int fun, size_t size);
-void						update_data(t_metadata *data,
-		size_t size, int type);
 
 #endif

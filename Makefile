@@ -38,14 +38,11 @@ INCLUDE = -I $(INCDIR) -I $(LFTDIR)includes
 
 SRC = \
 		calloc.c \
-		do_mmap.c \
-		find_room.c \
 		free.c \
 		malloc.c \
 		realloc.c \
 		show_alloc_mem.c \
-		static.c \
-		utils.c
+		utils.c 
 
 O_FILES = $(SRC:%.c=$(OBJDIR)%.o)
 
