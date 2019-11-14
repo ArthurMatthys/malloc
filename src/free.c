@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:35:39 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/14 09:59:22 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 16:15:15 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,14 +35,9 @@ static void	do_munmap(t_metablock *ptr, int type)
 		ptr->next->previous = ptr->previous;
 	if (ptr->previous)
 		ptr->previous->next = ptr->next;
-	munmap(ptr, ptr->size + sizeof(t_metablock));
+	if (munmap(ptr, ptr->size + sizeof(t_metablock)) < 0)
+		ft_putstr_fd("Munmap failed\n", 2);
 	ptr = NULL;
-}
-
-static void	check_free_space(t_metablock *ptr, t_metadata *data, int type)
-{
-	if (data->size + sizeof(t_metadata) == ptr->size)
-		do_munmap(ptr, type);
 }
 
 static void	check_munmap(t_metablock *ptr, t_metadata *data, int type)
@@ -51,10 +46,29 @@ static void	check_munmap(t_metablock *ptr, t_metadata *data, int type)
 	{
 		if ((void*)data > (void*)ptr && (void*)data < (void*)(ptr + ptr->size))
 		{
-			check_free_space(ptr, (t_metadata*)(ptr + 1), type);
+			if (data->size + sizeof(t_metadata) == ptr->size)
+				do_munmap(ptr, type);
 			break ;
 		}
 		ptr = ptr->next;
+	}
+}
+
+static void	merge_metadata(t_metadata *data)
+{
+	if (data->next && data->next->freed)
+	{
+		data->size += (sizeof(t_metadata) + data->next->size);
+		data->next = data->next->next;
+		if (data->next)
+			data->next->previous = data;
+	}
+	if (data->previous && data->previous->freed)
+	{
+		data->previous->size += (sizeof(t_metadata) + data->size);
+		data->previous->next = data->next;
+		if (data->next)
+			data->next->previous = data->previous;
 	}
 }
 
@@ -70,6 +84,8 @@ void		free(void *ptr)
 		return ;
 	data->freed = 1;
 	type = get_type(data->size);
+	if (type != LARGE)
+		merge_metadata(data);
 	if (type != LARGE)
 		check_munmap(g_data[type], data, type);
 	else

@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/28 10:05:17 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 15:43:32 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 16:07:23 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,6 +34,8 @@ void		update_data(t_metadata *data, size_t size, int type)
 		new->size = size_left - sizeof(t_metadata);
 		new->freed = 1;
 		new->next = data->next;
+		if (new->next)
+			new->next->previous = new;
 		new->previous = data;
 		data->next = new;
 	}
