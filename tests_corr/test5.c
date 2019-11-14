@@ -6,14 +6,14 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 16:18:13 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 14:56:52 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 09:52:18 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-int	main()
+int	main(void)
 {
 	void	*ptr1;
 	void	*ptr2;

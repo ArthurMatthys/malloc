@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 16:26:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 17:05:13 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 09:49:36 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ static size_t	show_allocated_memory(t_metadata *data, int type)
 	if (!data)
 		return (0);
 	size = data->freed ? 0 : data->size;
-	if (!data->freed || data->freed)
+	if (!data->freed)
 	{
 		if (type == LARGE)
 			ft_printf("LARGE : %#X\n", data);

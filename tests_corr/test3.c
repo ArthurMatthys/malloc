@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 13:28:44 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 17:04:05 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 09:51:46 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ void	print(char *s)
 	write(1, s, strlen(s));
 }
 
-int main()
+int		main(void)
 {
 	char *addr1;
 	char *addr3;
@@ -29,7 +29,7 @@ int main()
 	addr1 = (char*)malloc(16 * M);
 	strcpy(addr1, "Bonjours\n");
 	print(addr1);
-	addr3 = (char*)realloc(addr1, 128*M);
+	addr3 = (char*)realloc(addr1, 128 * M);
 	addr3[127 * M] = 42;
 	print(addr3);
 	return (0);

@@ -6,14 +6,14 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 13:22:48 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/09 17:41:34 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 09:51:22 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/malloc.h"
 
-int	main()
+int	main(void)
 {
 	int		i;
 	char	*addr;

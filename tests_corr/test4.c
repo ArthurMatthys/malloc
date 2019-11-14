@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 16:16:19 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 17:04:43 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 09:52:09 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,14 +19,14 @@ void	print(char *s)
 	write(1, s, strlen(s));
 }
 
-int main()
+int		main(void)
 {
 	char *addr;
 
 	addr = malloc(16);
 	free(NULL);
 	free((void *)addr + 5);
-	if (realloc((void*)addr +5, 10) == NULL)
+	if (realloc((void*)addr + 5, 10) == NULL)
 		print("Bonjours\n");
 	return (0);
 }
