@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:35:39 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/13 17:11:00 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 09:59:22 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,8 @@ static void	do_big_munmap(t_metadata *ptr)
 		ptr->next->previous = ptr->previous;
 	if (ptr->previous)
 		ptr->previous->next = ptr->next;
-	munmap(ptr, ptr->size + sizeof(t_metadata));
+	if (munmap(ptr, ptr->size + sizeof(t_metadata)) < 0)
+		ft_putstr_fd("Munmap failed\n", 2);
 	ptr = NULL;
 }
 
