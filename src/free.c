@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:35:39 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/14 16:15:15 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/21 10:46:46 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,8 @@ static void	check_munmap(t_metablock *ptr, t_metadata *data, int type)
 	{
 		if ((void*)data > (void*)ptr && (void*)data < (void*)(ptr + ptr->size))
 		{
-			if (data->size + sizeof(t_metadata) == ptr->size)
+			if (data->size + sizeof(t_metadata) +
+					sizeof(t_metablock) == ptr->size)
 				do_munmap(ptr, type);
 			break ;
 		}

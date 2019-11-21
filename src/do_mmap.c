@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 09:07:15 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/14 09:57:58 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/21 10:42:41 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,7 @@ void		*do_mmap(size_t size_alloc, int type)
 	if (new_area == MAP_FAILED && ft_printf("Mmap failed\n"))
 		return (NULL);
 	new_area->type = type;
-	new_area->size = size_alloc - sizeof(t_metablock);
+	new_area->size = size_alloc;
 	new_area->previous = NULL;
 	new_area->next = NULL;
 	cpy = g_data[type];
