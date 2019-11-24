@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/07 16:26:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/14 16:15:46 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/24 20:44:02 by arthur      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ static size_t	show_data(t_metablock *block, const char *str, int type)
 	size_block = 0;
 	while (cpy)
 	{
-		ft_printf("%s : %X\n", str, cpy);
+		ft_printf("%s : %#X\n", str, cpy);
 		size_block += show_allocated_memory((t_metadata*)(cpy + 1), type);
 		cpy = cpy->next;
 	}
