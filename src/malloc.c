@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:34:42 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/14 16:07:47 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/24 20:38:46 by arthur      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,7 +36,7 @@ static void	*malloc_large(size_t size)
 	final_size = round_up(size + sizeof(t_metadata), getpagesize());
 	data = mmap(0, final_size,
 			PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
-	if (data == MAP_FAILED && ft_printf("Mmap failed\n"))
+	if (data == MAP_FAILED)
 		return (NULL);
 	data->freed = 0;
 	data->size = final_size - sizeof(t_metadata);
