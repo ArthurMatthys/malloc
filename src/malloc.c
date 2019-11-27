@@ -6,7 +6,7 @@
 /*   By: amatthys <amatthys@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/06 08:34:42 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/24 20:38:46 by arthur      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/27 09:33:45 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,8 @@ static void	*new_alloc(size_t size, int type)
 	size_type[TINY] = TINY_BLOCK_SIZE;
 	size_type[SMALL] = SMALL_BLOCK_SIZE;
 	block = do_mmap(size_type[type], type);
+	if (!block)
+		return (NULL);
 	data = find_block(g_data[type], NULL, FIND_ROOM, size);
 	update_data(data, size, type);
 	return (data + 1);
